@@ -61,3 +61,53 @@ print(id(pt), id(pt2), id(pt3),)
 Этот метод принимает два параметра (ширину и длину), вызывается в конструкторе для вычисления площади конкретного 
 прямоугольника и результат присваивается локальному свойству создаваемого экземпляра класса.
 '''
+
+"""
+class Rectangle:
+    __res = 0
+
+    def __init__(self, a, b):
+        self.res = Rectangle.getArea(a, b)
+        print(self.__res)
+
+    @staticmethod
+    def getArea(a, b):
+        return a * b
+
+
+ex = Rectangle(2, 3)
+ex2 = Rectangle(2, 3)
+
+print(id(ex.res), id(ex2.res))"""
+
+"""
+2. Создайте класс Dog (собака), в каждом его экземпляре создавайте несколько локальных свойств 
+(например: имя, возраст, порода) и сделайте так, чтобы можно было создавать не более пяти экземпляров этого класса.
+"""
+
+
+class Dog:
+    __count = 0
+
+    def __new__(cls, *args, **kwargs):
+        print(Dog.__count)
+        if cls.__count < 5:
+            instance = super(Dog, cls).__new__(cls)  # ???????
+            cls.__count += 1
+            return instance
+        else:
+            print(f"max quality ex: {Dog.__count}")
+
+    def __init__(self, name="name", age="age", type="type"):
+        self.name = name
+        self.age = age
+        self.type = type
+
+
+d11 = Dog()
+d12 = Dog("1", "2", "3")
+d13 = Dog()
+d14 = Dog()
+d15 = Dog()
+d16 = Dog()
+print( id(d11), id(d12), id(d13), id(d14), id(d15), id(d16), sep="\n")
